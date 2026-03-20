@@ -5,34 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dulshan | Tech Portfolio</title>
     <style>
+        :root {
+            --bg: #0a0a0a;
+            --green: #00ff41;
+            --red: #ff003c;
+            --dark: #111;
+        }
+
         body {
-            background-color: #0a0a0a;
-            color: #00ff41;
+            background-color: var(--bg);
+            color: var(--green);
             font-family: 'Courier New', monospace;
             margin: 0;
             padding: 20px;
             text-align: center;
+            scroll-behavior: smooth;
         }
+
         .container { max-width: 900px; margin: auto; }
-        header { border-bottom: 2px solid #ff003c; padding: 20px; margin-bottom: 30px; }
+        
+        header { border-bottom: 2px solid var(--red); padding: 20px; margin-bottom: 30px; }
         
         .profile-pic {
             width: 150px; height: 150px;
             border-radius: 50%;
-            border: 2px solid #ff003c;
+            border: 2px solid var(--red);
             object-fit: cover;
-            background: #111;
+            background: var(--dark);
         }
 
+        h1, h2, h3 { color: var(--red); text-transform: uppercase; letter-spacing: 2px; }
+
+        /* --- SKILLS SECTION --- */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .skill-box {
+            background: var(--dark);
+            border: 1px solid #333;
+            padding: 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .skill-box:hover {
+            border-color: var(--green);
+            color: #fff;
+            box-shadow: 0 0 10px var(--green);
+        }
+
+        /* --- PROJECTS SECTION --- */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            margin-top: 20px;
         }
 
         .card {
-            background: #111;
+            background: var(--dark);
             border: 1px solid #333;
             padding: 15px;
             transition: 0.3s;
@@ -40,57 +74,46 @@
         }
         
         .card:hover {
-            border-color: #ff003c;
+            border-color: var(--red);
             box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
             transform: translateY(-5px);
         }
 
-        .card img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border: 1px solid #444;
-        }
+        .card img { width: 100%; height: 160px; object-fit: cover; border: 1px solid #444; }
 
-        h1, h3 { color: #ff003c; text-transform: uppercase; }
-
-        /* --- MODAL POPUP STYLES --- */
+        /* --- MODAL --- */
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 10000; 
+            display: none; position: fixed; z-index: 10000; 
             left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.95);
             justify-content: center; align-items: center;
         }
 
         .modal-content {
-            background: #0a0a0a;
-            border: 2px solid #ff003c;
+            background: var(--bg); border: 2px solid var(--red);
             padding: 30px; width: 90%; max-width: 500px;
-            position: relative; box-shadow: 0 0 30px #ff003c;
+            position: relative; box-shadow: 0 0 30px var(--red);
         }
 
-        .close-btn { 
-            position: absolute; top: 10px; right: 20px; 
-            color: #ff003c; font-size: 35px; cursor: pointer; 
-        }
-
+        .close-btn { position: absolute; top: 10px; right: 20px; color: var(--red); font-size: 35px; cursor: pointer; }
         #modal-img { width: 100%; height: auto; border: 1px solid #333; margin-bottom: 15px; }
         
-        /* FOOTER BUTTONS */
+        /* --- FOOTER --- */
         .btn {
-            display: inline-block;
-            width: 200px;
-            margin: 8px;
-            padding: 12px 0;
-            border: 1px solid #00ff41;
-            color: #00ff41;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+            display: inline-block; width: 220px;
+            margin: 8px; padding: 12px 0;
+            border: 1px solid var(--green);
+            color: var(--green); text-decoration: none;
+            font-weight: bold; transition: 0.3s;
         }
-        .btn:hover { background: #00ff41; color: #000; }
+        .btn:hover { background: var(--green); color: #000; }
+
+        #backToTop {
+            position: fixed; bottom: 20px; right: 20px;
+            background: var(--bg); color: var(--red);
+            border: 1px solid var(--red); padding: 10px;
+            cursor: pointer; display: none; font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -98,32 +121,48 @@
 <div class="container">
     <header>
         <img src="images/profile.jpg" class="profile-pic" alt="Dulshan" onerror="this.src='https://via.placeholder.com/150'">
-        <h1>HELLO, I'M DULSHAN</h1>
-        <p>ICT Undergraduate | SEUSL | Networking & Cloud</p>
+        <h1>DULSHAN DISSANAYAKA</h1>
+        <p>ICT Undergraduate | SEUSL | Tech Professional</p>
     </header>
 
-    <div class="project-grid">
-        <div class="card" onclick="openModal('C Projects', 'C-Language secure systems, featuring database theory and low-level programming.', 'images/project1.jpg')">
-            <img src="images/project1.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=C+Projects'">
-            <h3>C language Projects</h3>
-            <p>Click to view system logs...</p>
+    <section id="skills">
+        <h2>> CORE_COMPETENCIES</h2>
+        <div class="skills-container">
+            <div class="skill-box">C Programming</div>
+            <div class="skill-box">Java (OOP)</div>
+            <div class="skill-box">Networking</div>
+            <div class="skill-box">Cloud Computing</div>
+            <div class="skill-box">Database (SQL)</div>
+            <div class="skill-box">Graphic Design</div>
+            <div class="skill-box">OS Architecture</div>
         </div>
-        
-        <div class="card" onclick="openModal('Java Projects', 'OOP driven applications focusing on logic, GUI design, and database integration.', 'images/project2.jpg')">
-            <img src="images/project2.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Java+Projects'">
-            <h3>Java Projects</h3>
-            <p>Click to view details...</p>
+    </section>
+
+    <section id="projects">
+        <h2>> SYSTEM_PROJECTS</h2>
+        <div class="project-grid">
+            <div class="card" onclick="openModal('C Language Projects', 'Secure system logic and command-line application development.', 'images/project1.jpg')">
+                <img src="images/project1.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=C+Projects'">
+                <h3>C Projects</h3>
+                <p>[Click to Open]</p>
+            </div>
+            
+            <div class="card" onclick="openModal('Java Core Apps', 'OOP driven tools including GUI design and database integration.', 'images/project2.jpg')">
+                <img src="images/project2.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Java+Projects'">
+                <h3>Java Apps</h3>
+                <p>[Click to Open]</p>
+            </div>
+            
+            <div class="card" onclick="openModal('Networking Labs', 'Cisco Packet Tracer labs focusing on OSPF and IPv4 Subnetting.', 'images/project3.jpg')">
+                <img src="images/project3.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Networking'">
+                <h3>Networking</h3>
+                <p>[Click to Open]</p>
+            </div>
         </div>
-        
-        <div class="card" onclick="openModal('Networking', 'Labs involving Cisco Packet Tracer, IPv4 subnetting, and routing protocols.', 'images/project3.jpg')">
-            <img src="images/project3.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Networking'">
-            <h3>Networking Learning</h3>
-            <p>Click to view lab data...</p>
-        </div>
-    </div>
+    </section>
 
     <footer>
-        <h2 style="color:#ff003c; margin-top: 40px;">> CONTACT_DETAILS</h2>
+        <h2 style="margin-top: 40px;">> CONTACT_ACCESS</h2>
         <a href="https://github.com/dulshantd" class="btn" target="_blank">GITHUB</a><br>
         <a href="https://linkedin.com/in/dulshan-dissanayaka" class="btn" target="_blank">LINKEDIN</a><br>
         <a href="mailto:dulshandissanayaka480@gmail.com" class="btn">EMAIL</a><br>
@@ -135,10 +174,12 @@
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal()">&times;</span>
         <img id="modal-img" src="" alt="Project">
-        <h2 id="modal-title" style="color: #ff003c;"></h2>
+        <h2 id="modal-title"></h2>
         <p id="modal-desc" style="color: #ccc;"></p>
     </div>
 </div>
+
+<button id="backToTop" onclick="window.scrollTo(0,0)">TOP</button>
 
 <script>
     function openModal(title, desc, img) {
@@ -152,13 +193,15 @@
         document.getElementById('projectModal').style.display = 'none';
     }
 
-    // Close modal when clicking outside the box
     window.onclick = function(event) {
-        let modal = document.getElementById('projectModal');
-        if (event.target == modal) {
-            closeModal();
-        }
+        if (event.target == document.getElementById('projectModal')) closeModal();
     }
+
+    window.onscroll = function() {
+        let btn = document.getElementById("backToTop");
+        if (document.documentElement.scrollTop > 300) btn.style.display = "block";
+        else btn.style.display = "none";
+    };
 </script>
 
 </body>
