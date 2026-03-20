@@ -225,6 +225,23 @@ powerPopup {
         </div>
     </section>
 </div>
+<script>
+    const observerOptions = {
+        threshold: 0.2
+    };
 
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('appear');
+            }
+        });
+    }, observerOptions);
+
+    // Apply observer to all project cards
+    document.querySelectorAll('.project-card').forEach(card => {
+        observer.observe(card);
+    });
+</script>
 </body>
 </html>
