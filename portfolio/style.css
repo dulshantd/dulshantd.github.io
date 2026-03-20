@@ -1,0 +1,10 @@
+#modal-desc {
+    color: #ccc;
+    text-align: left;
+    white-space: pre-line; /* This makes the \n line breaks work */
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
