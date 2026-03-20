@@ -149,24 +149,23 @@
             <img src="images/project1.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Bank+System+C'">
             <h3>Bank Management</h3>
             <p>C-Language System with File Handling.</p>
-            <button class="btn" style="width: 80%; font-size: 0.8rem; border-color: #ff003c; color: #ff003c;" 
-                onclick="openVideoModal('Bank Management System', 'A console-based Bank Management System developed in C, focused on file handling, data persistence, and account operations.\n\nFEATURES:\n• User account creation & login\n• Deposit and withdrawal functionalities\n• Transaction history tracking\n• Balance checking\n• Permanent data storage via File I/O', 'https://res.cloudinary.com/deieoh40p/video/upload/v1774036100/bank_kktnba.mp4')">
-                VIEW VIDEO DEMO
+            <button class="btn" style="width: 90%; border-color: #ff003c; color: #ff003c;" 
+                onclick="playVideo('Bank Management System', 'A console-based Bank Management System developed in C.\n\nFEATURES:\n• User account creation & login\n• Permanent data storage via File I/O', 'https://res.cloudinary.com/deieoh40p/video/upload/v1774036100/bank_kktnba.mp4')">
+                WATCH VIDEO DEMO
             </button>
         </div>
         
-        <div class="card" onclick="openModal('Java Core Apps', 'OOP driven applications focusing on logic, GUI design, and database integration.', 'images/project2.jpg')">
+        <div class="card" onclick="openModal('Java Core Apps', 'OOP driven applications focusing on logic and GUI design.', 'images/project2.jpg')">
             <img src="images/project2.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Java+Projects'">
             <h3>Java Projects</h3>
             <p>[Click for Details]</p>
         </div>
         
-        <div class="card" onclick="openModal('Networking Labs', 'Labs involving Cisco Packet Tracer, IPv4 subnetting, and routing protocols.', 'images/project3.jpg')">
+        <div class="card" onclick="openModal('Networking Labs', 'Labs involving Cisco Packet Tracer and Routing protocols.', 'images/project3.jpg')">
             <img src="images/project3.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Networking'">
             <h3>Networking</h3>
             <p>[Click for Details]</p>
         </div>
-
     </div>
 </section>
     <footer>
@@ -184,6 +183,21 @@
         <img id="modal-img" src="" alt="Project">
         <h2 id="modal-title"></h2>
         <p id="modal-desc" style="color: #ccc;"></p>
+    </div>
+</div>
+
+    <div id="projectModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        
+        <img id="modal-img" src="" style="width:100%; display:none;">
+        
+        <video id="modal-video" controls style="width:100%; display:none; border:1px solid #ff003c;">
+            <source id="video-source" src="" type="video/mp4">
+        </video>
+
+        <h2 id="modal-title" style="margin-top:15px;"></h2>
+        <p id="modal-desc" style="color: #ccc; text-align:left; white-space: pre-line;"></p>
     </div>
 </div>
 
@@ -211,24 +225,50 @@
         else btn.style.display = "none";
     };
 
-    function openVideoModal(title, desc, videoUrl) {
+ function playVideo(title, desc, videoUrl) {
+    const modal = document.getElementById('projectModal');
+    const video = document.getElementById('modal-video');
+    const img = document.getElementById('modal-img');
+    const source = document.getElementById('video-source');
+
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-desc').innerText = desc;
-    
-    // This replaces the image tag with a Video player inside the modal
-    let mediaContainer = document.getElementById('modal-img');
-    mediaContainer.outerHTML = `<video id="modal-img" controls autoplay style="width:100%; border:1px solid #ff003c; box-shadow: 0 0 15px #ff003c;">
-                                    <source src="${videoUrl}" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>`;
-    
-    document.getElementById('projectModal').style.display = 'flex';
+
+    // Show Video, Hide Image
+    img.style.display = "none";
+    video.style.display = "block";
+
+    // Load and Play Video
+    source.src = videoUrl;
+    video.load();
+    video.play();
+
+    modal.style.display = 'flex';
+}
+
+function openModal(title, desc, imgUrl) {
+    const modal = document.getElementById('projectModal');
+    const video = document.getElementById('modal-video');
+    const img = document.getElementById('modal-img');
+
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-desc').innerText = desc;
+
+    // Show Image, Hide Video
+    video.pause();
+    video.style.display = "none";
+    img.style.display = "block";
+    img.src = imgUrl;
+
+    modal.style.display = 'flex';
 }
 
 function closeModal() {
-    document.getElementById('projectModal').style.display = 'none';
-    // Optional: Refresh page or reset modal content to stop video sound when closing
-    location.reload(); 
+    const modal = document.getElementById('projectModal');
+    const video = document.getElementById('modal-video');
+    
+    video.pause(); // Stop the video sound when closing
+    modal.style.display = 'none';
 }
 </script>
 
