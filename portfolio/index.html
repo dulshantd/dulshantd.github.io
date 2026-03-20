@@ -23,7 +23,6 @@
         }
 
         .container { max-width: 900px; margin: auto; }
-        
         header { border-bottom: 2px solid var(--red); padding: 20px; margin-bottom: 30px; }
         
         .profile-pic {
@@ -96,7 +95,10 @@
         }
 
         .close-btn { position: absolute; top: 10px; right: 20px; color: var(--red); font-size: 35px; cursor: pointer; }
-        #modal-img { width: 100%; height: auto; border: 1px solid #333; margin-bottom: 15px; }
+        
+        #modal-img, #modal-video { 
+            width: 100%; height: auto; border: 1px solid #333; margin-bottom: 15px; 
+        }
         
         /* --- FOOTER --- */
         .btn {
@@ -105,6 +107,8 @@
             border: 1px solid var(--green);
             color: var(--green); text-decoration: none;
             font-weight: bold; transition: 0.3s;
+            cursor: pointer;
+            background: transparent;
         }
         .btn:hover { background: var(--green); color: #000; }
 
@@ -135,39 +139,39 @@
             <div class="skill-box">Database (SQL)</div>
             <div class="skill-box">Graphic Design</div>
             <div class="skill-box">OS Architecture</div>
-            <div class="skill-box">Software Developing</div>
+            <div class="skill-box">Software Development</div>
             <div class="skill-box">Project Management</div>
             <div class="skill-box">Quick Learning</div>
         </div>
     </section>
 
     <section id="projects">
-    <h2>Developed Projects</h2>
-    <div class="project-grid">
-        
-        <div class="card">
-            <img src="images/project1.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Bank+System+C'">
-            <h3>Bank Management</h3>
-            <p>C-Language System with File Handling.</p>
-            <button class="btn" style="width: 90%; border-color: #ff003c; color: #ff003c;" 
-                onclick="playVideo('Bank Management System', 'A console-based Bank Management System developed in C.\n\nFEATURES:\n• User account creation & login\n• Permanent data storage via File I/O', 'https://res.cloudinary.com/deieoh40p/video/upload/v1774036100/bank_kktnba.mp4')">
-                WATCH DEMO
-            </button>
+        <h2>Developed Projects</h2>
+        <div class="project-grid">
+            <div class="card">
+                <img src="images/project1.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Bank+System+C'">
+                <h3>Bank Management</h3>
+                <p>C-Language System with File Handling.</p>
+                <button class="btn" style="width: 90%; border-color: #ff003c; color: #ff003c;" 
+                    onclick="playVideo('Bank Management System', 'A console-based Bank Management System developed in C.\n\nFEATURES:\n• User account creation & login\n• Permanent data storage via File I/O', 'https://res.cloudinary.com/deieoh40p/video/upload/f_auto,q_auto/v1774036100/bank_kktnba.mp4')">
+                    WATCH DEMO
+                </button>
+            </div>
+            
+            <div class="card" onclick="openModal('Java Core Apps', 'OOP driven applications focusing on logic and GUI design.', 'images/project2.jpg')">
+                <img src="images/project2.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Java+Projects'">
+                <h3>Java Projects</h3>
+                <p>[Click for Details]</p>
+            </div>
+            
+            <div class="card" onclick="openModal('Networking Labs', 'Labs involving Cisco Packet Tracer and Routing protocols.', 'images/project3.jpg')">
+                <img src="images/project3.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Networking'">
+                <h3>Networking</h3>
+                <p>[Click for Details]</p>
+            </div>
         </div>
-        
-        <div class="card" onclick="openModal('Java Core Apps', 'OOP driven applications focusing on logic and GUI design.', 'images/project2.jpg')">
-            <img src="images/project2.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Java+Projects'">
-            <h3>Java Projects</h3>
-            <p>[Click for Details]</p>
-        </div>
-        
-        <div class="card" onclick="openModal('Networking Labs', 'Labs involving Cisco Packet Tracer and Routing protocols.', 'images/project3.jpg')">
-            <img src="images/project3.jpg" onerror="this.src='https://via.placeholder.com/300x160?text=Networking'">
-            <h3>Networking</h3>
-            <p>[Click for Details]</p>
-        </div>
-    </div>
-</section>
+    </section>
+
     <footer>
         <h2 style="margin-top: 40px;">Reach Me</h2>
         <a href="https://github.com/dulshantd" class="btn" target="_blank">GITHUB</a><br>
@@ -178,15 +182,6 @@
 </div>
 
 <div id="projectModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <img id="modal-img" src="" alt="Project">
-        <h2 id="modal-title"></h2>
-        <p id="modal-desc" style="color: #ccc;"></p>
-    </div>
-</div>
-
-    <div id="projectModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal()">&times;</span>
         
@@ -205,14 +200,55 @@
 
 <script>
     function openModal(title, desc, img) {
+        const modal = document.getElementById('projectModal');
+        const video = document.getElementById('modal-video');
+        const imgElement = document.getElementById('modal-img');
+
         document.getElementById('modal-title').innerText = title;
         document.getElementById('modal-desc').innerText = desc;
-        document.getElementById('modal-img').src = img;
-        document.getElementById('projectModal').style.display = 'flex';
+
+        // Reset and hide video
+        video.pause();
+        video.style.display = "none";
+        
+        // Show Image
+        imgElement.style.display = "block";
+        imgElement.src = img;
+
+        modal.style.display = 'flex';
+    }
+
+    function playVideo(title, desc, videoUrl) {
+        const modal = document.getElementById('projectModal');
+        const video = document.getElementById('modal-video');
+        const img = document.getElementById('modal-img');
+        const source = document.getElementById('video-source');
+
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-desc').innerText = desc;
+
+        // Hide image, show video
+        img.style.display = "none";
+        video.style.display = "block";
+
+        // Set video source and reload
+        source.setAttribute('src', videoUrl);
+        video.load();
+        
+        modal.style.display = 'flex';
+
+        // Play after a slight delay to ensure the modal is visible
+        setTimeout(() => {
+            video.play().catch(e => console.log("Manual play required"));
+        }, 200);
     }
 
     function closeModal() {
-        document.getElementById('projectModal').style.display = 'none';
+        const modal = document.getElementById('projectModal');
+        const video = document.getElementById('modal-video');
+        video.pause();
+        video.currentTime = 0;
+        modal.style.display = 'none';
     }
 
     window.onclick = function(event) {
@@ -224,46 +260,6 @@
         if (document.documentElement.scrollTop > 300) btn.style.display = "block";
         else btn.style.display = "none";
     };
-
-function playVideo(title, desc, videoUrl) {
-    const modal = document.getElementById('projectModal');
-    const video = document.getElementById('modal-video');
-    const img = document.getElementById('modal-img');
-    const source = document.getElementById('video-source');
-
-    // 1. Set text content
-    document.getElementById('modal-title').innerText = title;
-    document.getElementById('modal-desc').innerText = desc;
-
-    // 2. Clear previous video data to avoid glitches
-    video.pause();
-    source.setAttribute('src', videoUrl);
-    
-    // 3. Toggle Visibility
-    img.style.display = "none";
-    video.style.display = "block";
-    modal.style.display = 'flex';
-
-    // 4. Force Reload and Play after a tiny delay
-    video.load();
-    
-    // Using a timeout ensures the "display: block" is finished before playing
-    setTimeout(() => {
-        video.play().catch(error => {
-            console.log("Autoplay prevented, showing controls instead.");
-        });
-    }, 150); 
-}
-
-function closeModal() {
-    const modal = document.getElementById('projectModal');
-    const video = document.getElementById('modal-video');
-    
-    // Stop the video and clear the source to kill the sound immediately
-    video.pause();
-    video.currentTime = 0;
-    modal.style.display = 'none';
-}
 </script>
 
 </body>
