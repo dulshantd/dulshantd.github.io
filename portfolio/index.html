@@ -210,6 +210,26 @@
         if (document.documentElement.scrollTop > 300) btn.style.display = "block";
         else btn.style.display = "none";
     };
+
+    function openVideoModal(title, desc, videoUrl) {
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-desc').innerText = desc;
+    
+    // This replaces the image tag with a Video player inside the modal
+    let mediaContainer = document.getElementById('modal-img');
+    mediaContainer.outerHTML = `<video id="modal-img" controls autoplay style="width:100%; border:1px solid #ff003c; box-shadow: 0 0 15px #ff003c;">
+                                    <source src="${videoUrl}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>`;
+    
+    document.getElementById('projectModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('projectModal').style.display = 'none';
+    // Optional: Refresh page or reset modal content to stop video sound when closing
+    location.reload(); 
+}
 </script>
 
 </body>
