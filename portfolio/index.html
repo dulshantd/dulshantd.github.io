@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulshan | Tech Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --terminal-green: #00ff41;
+            --hacker-red: #ff003c;
+            --glass-bg: rgba(20, 20, 20, 0.8);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--terminal-green);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Scanline effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 50px;
+            border-bottom: 1px solid var(--hacker-red);
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 3px solid var(--hacker-red);
+            box-shadow: 0 0 20px var(--hacker-red);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--hacker-red);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 10px 0;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        section {
+            margin: 60px 0;
+        }
+
+        h2 {
+            color: var(--hacker-red);
+            border-left: 5px solid var(--hacker-red);
+            padding-left: 15px;
+            text-transform: uppercase;
+        }
+
+        .about-text {
+            background: var(--glass-bg);
+            padding: 20px;
+            border: 1px solid #333;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: #111;
+            border: 1px solid #333;
+            padding: 15px;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--hacker-red);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 0, 60, 0.2);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 150px;
+            background: #222;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 1px solid #444;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact-item {
+            background: #1a1a1a;
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: 1px solid var(--terminal-green);
+        }
+
+        a {
+            color: var(--terminal-green);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: white;
+            text-shadow: 0 0 10px var(--terminal-green);
+        }
+
+        .red-text { color: var(--hacker-red); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <img src="images/profile.jpg" alt="Dulshan" class="profile-img">
+        <h1>Hello, I'm <span class="red-text">Dulshan</span></h1>
+        <p class="subtitle">ICT Undergraduate | Networking & Cloud Enthusiast</p>
+    </header>
+
+    <section id="about">
+        <h2>AboutMe</h2>
+        <div class="about-text">
+            <p>I am an ICT Undergraduate at the South Eastern University of Sri Lanka with a deep interest in networking, cloud computing, and systems architecture.</p>
+            <p>I enjoy exploring low-level programming in <span class="red-text">C</span> and building efficient, scalable applications in <span class="red-text">Java</span>. My goal is to bridge the gap between complex infrastructure and user-centric software solutions.</p>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <img src="images/project1.jpg" alt="Bank System" class="project-img">
+                <h3 class="red-text">Bank Management System</h3>
+                <p>Developed using C with features like account management and data persistence.</p>
+            </div>
+            <div class="project-card">
+                <img src="images/project2.jpg" alt="Java Apps" class="project-img">
+                <h3 class="red-text">Java Applications</h3>
+                <p>A collection of applications focusing on Object-Oriented Programming (OOP) concepts.</p>
+            </div>
+            <div class="project-card">
+                <img src="images/project3.jpg" alt="Networking" class="project-img">
+                <h3 class="red-text">Networking Learning</h3>
+                <p>Simulation of IP addressing, subnetting, and basic routing protocols.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <div class="contact-info">
+            <div class="contact-item">EMAIL: dulshandissanayaka480@gmail.com</div>
+            <div class="contact-item">PHONE: (+94) 76-3565058</div>
+            <div class="contact-item">LINKEDIN: <a href="https://linkedin.com/in/dulshan-dissanayaka" target="_blank">dulshan-dissanayaka</a></div>
+            <div class="contact-item">GITHUB: <a href="https://github.com/dulshantd" target="_blank">dulshantd</a></div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
