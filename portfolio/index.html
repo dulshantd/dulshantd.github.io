@@ -225,49 +225,43 @@
         else btn.style.display = "none";
     };
 
- function playVideo(title, desc, videoUrl) {
+function playVideo(title, desc, videoUrl) {
     const modal = document.getElementById('projectModal');
     const video = document.getElementById('modal-video');
     const img = document.getElementById('modal-img');
     const source = document.getElementById('video-source');
 
+    // 1. Set text content
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-desc').innerText = desc;
 
-    // Show Video, Hide Image
+    // 2. Clear previous video data to avoid glitches
+    video.pause();
+    source.setAttribute('src', videoUrl);
+    
+    // 3. Toggle Visibility
     img.style.display = "none";
     video.style.display = "block";
+    modal.style.display = 'flex';
 
-    // Load and Play Video
-    source.src = videoUrl;
+    // 4. Force Reload and Play after a tiny delay
     video.load();
-    video.play();
-
-    modal.style.display = 'flex';
-}
-
-function openModal(title, desc, imgUrl) {
-    const modal = document.getElementById('projectModal');
-    const video = document.getElementById('modal-video');
-    const img = document.getElementById('modal-img');
-
-    document.getElementById('modal-title').innerText = title;
-    document.getElementById('modal-desc').innerText = desc;
-
-    // Show Image, Hide Video
-    video.pause();
-    video.style.display = "none";
-    img.style.display = "block";
-    img.src = imgUrl;
-
-    modal.style.display = 'flex';
+    
+    // Using a timeout ensures the "display: block" is finished before playing
+    setTimeout(() => {
+        video.play().catch(error => {
+            console.log("Autoplay prevented, showing controls instead.");
+        });
+    }, 150); 
 }
 
 function closeModal() {
     const modal = document.getElementById('projectModal');
     const video = document.getElementById('modal-video');
     
-    video.pause(); // Stop the video sound when closing
+    // Stop the video and clear the source to kill the sound immediately
+    video.pause();
+    video.currentTime = 0;
     modal.style.display = 'none';
 }
 </script>
